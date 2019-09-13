@@ -55,25 +55,25 @@ arguments (hopefully at most one) inside.
 
 For example:
 
-    "{gender_of_host, **select**, "
-      "**female** {"
-        "{num_guests, **plural**, offset:1 "
-          "=0 {{host} does not give a party.}"
-          "=1 {{host} invites {guest} to **her** party.}"
-          "=2 {{host} invites {guest} and one other person to her party.}"
-          "other {{host} invites {guest} and # other people to her party.}}}"
-      "**male** {"
-        "{num_guests, **plural**, offset:1 "
-          "=0 {{host} does not give a party.}"
-          "=1 {{host} invites {guest} to **his** party.}"
-          "=2 {{host} invites {guest} and one other person to his party.}"
-          "other {{host} invites {guest} and # other people to his party.}}}"
-      "**other** {"
-        "{num_guests, **plural**, offset:1 "
-          "=0 {{host} does not give a party.}"
-          "=1 {{host} invites {guest} to **their** party.}"
-          "=2 {{host} invites {guest} and one other person to their party.}"
-          "other {{host} invites {guest} and # other people to their party.}}}}"
+    "\{gender_of_host, **select**, "
+      "**female** \{"
+        "\{num_guests, **plural**, offset:1 "
+          "=0 \{\{host\} does not give a party.}"
+          "=1 \{\{host\} invites \{guest} to **her** party.}"
+          "=2 \{\{host\} invites \{guest} and one other person to her party.}"
+          "other \{\{host\} invites {guest} and # other people to her party.}}}"
+      "**male** \{"
+        "\{num_guests, **plural**, offset:1 "
+          "=0 \{\{host\} does not give a party.}"
+          "=1 \{\{host\} invites \{guest} to **his** party.}"
+          "=2 \{\{host\} invites \{guest} and one other person to his party.}"
+          "other \{\{host\} invites \{guest} and # other people to his party.}}}"
+      "**other** \{"
+        "\{num_guests, **plural**, offset:1 "
+          "=0 \{\{host\} does not give a party.}"
+          "=1 \{\{host\} invites \{guest} to **their** party.}"
+          "=2 \{\{host\} invites \{guest} and one other person to their party.}"
+          "other \{\{host\} invites \{guest} and # other people to their party.}}}}"
 
 **Note:** In a plural argument like in the example above, if the English message
 has both `=0` and `=1` (up to `=offset`+1) then it does not need a "`one`"
@@ -89,8 +89,8 @@ language](http://cldr.unicode.org/index/cldr-spec/plural-rules).*
 If syntax characters occur in the text portions, then they need to be quoted by
 enclosing the syntax in pairs of ASCII apostrophes. A pair of ASCII apostrophes
 always represents one ASCII apostrophe, similar to %% in printf representing one
-%, although this rule still applies inside quoted text. ("This '{isn''t}'
-obvious" → "This {isn't} obvious")
+%, although this rule still applies inside quoted text. ("This '\{isn''t}'
+obvious" → "This \{isn't} obvious")
 
 *   Before ICU 4.8, ASCII apostrophes always started quoted text and had
     inconsistent behavior in nested sub-messages, which was a source of problems
@@ -192,15 +192,15 @@ The following code fragment created this output: "At 4:34 PM on March 23, there
 was a disturbance in the Force on planet 7."
 
 UErrorCode err = U_ZERO_ERROR;
-Formattable arguments\[\] = {
+Formattable arguments\[\] = \{
 (int32_t)7,
 Formattable(Calendar.getNow(), Formattable::kIsDate),
 "a disturbance in the Force"
 };
 UnicodeString result;
 result = MessageFormat::format(
-"At {1,time,::jmm} on {1,date,::dMMMM}, there was {2} on
-planet{0,number,integer}.",
+"At \{1,time,::jmm} on \{1,date,::dMMMM}, there was \{2} on
+planet\{0,number,integer}.",
 arguments,
 3,
 result,
